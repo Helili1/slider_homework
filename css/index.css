@@ -1,113 +1,129 @@
+/* ===== ОБЩИЕ СТИЛИ ===== */
+/* Сброс стандартных отступов и модели box-sizing для всех элементов */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Правильный расчет размеров элементов */
 }
 
+/* Стилизация body - фоновая подложка */
 body {
-    background-color: #c1c1c1;
+    background-color: #c1c1c1; /* Серый фон для контраста */
 }
 
+/* ===== ОСНОВНОЙ КОНТЕЙНЕР СЛАЙДЕРА ===== */
 .slider-container {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 20px;
+    overflow: hidden; /* Скрытие выходящих за границы элементов */
+    position: relative; /* Для позиционирования внутренних элементов */
+    width: 100%; /* Занимает всю доступную ширину */
+    max-width: 1200px; /* Максимальная ширина для больших экранов */
+    margin: 2rem auto; /* Центрирование по горизонтали */
+    padding: 0 20px; /* Боковые отступы */
     align-items: center;
     justify-content: center;
 }
 
+/* ===== ОБЕРТКА СЛАЙДОВ ===== */
 .slider-wrapper {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    will-change: transform;
-    gap: 50px;
+    display: flex; /* Флекс-контейнер для горизонтального расположения */
+    transition: transform 0.5s ease-in-out; /* Анимация переключения */
+    will-change: transform; /* Оптимизация анимации */
+    gap: 50px; /* Расстояние между слайдами */
 }
 
+/* ===== ОТДЕЛЬНЫЙ СЛАЙД ===== */
 .slide {
-    flex: 0 0 calc(100% - (var(--gap) * (var(--slides-to-show) - 1)) / var(--slides-to-show));
-    min-width: 0;
-    height: 300px;
+    /* Динамическая ширина с учетом количества слайдов и промежутков */
+    flex: 0 0 calc(100% - (var(--gap) * (var(--slides-to-show) - 1))/ var(--slides-to-show));
+    min-width: 0; /* Исправление бага с переполнением в flex */
+    height: 300px; /* Фиксированная высота слайда */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 20px; /* Внутренний отступ */
+    box-sizing: border-box; /* Учет padding в ширине */
 }
 
+/* ===== СТИЛИЗАЦИЯ ИЗОБРАЖЕНИЙ ===== */
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    padding: 15px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    object-fit: contain; /* Сохранение пропорций изображения */
+    padding: 15px; /* Отступ внутри рамки */
+    background: #fff; /* Белая подложка */
+    border-radius: 12px; /* Закругление углов */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для объема */
 }
 
+/* ===== ПАНЕЛЬ НАВИГАЦИИ (ТОЧКИ) ===== */
 .navigation {
-    margin: 20px auto 0;
+    margin: 20px auto 0; /* Отступ сверху и центрирование */
     display: flex;
-    gap: 8px;
+    gap: 8px; /* Расстояние между точками */
     justify-content: center;
-    max-width: 1200px;
-    padding: 0 20px;
+    max-width: 1200px; /* Ограничение ширины */
+    padding: 0 20px; /* Боковые отступы */
 }
 
+/* ОБЫЧНОЕ СОСТОЯНИЕ ТОЧКИ */
 .navigation-dot {
     width: 12px;
     height: 12px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    transition: all 0.3s ease;
+    border-radius: 50%; /* Круглая форма */
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный */
+    cursor: pointer; /* Указатель при наведении */
+    transition: all 0.3s ease; /* Плавные изменения */
 }
 
+/* АКТИВНОЕ СОСТОЯНИЕ ТОЧКИ */
 .navigation-dot.active {
-    background-color: rgba(0, 123, 255, 0.5);
-    transform: scale(1.2);
+    background-color: rgba(0, 123, 255, 0.5); /* Синий цвет */
+    transform: scale(1.2); /* Увеличение размера */
 }
 
+/* ===== АДАПТИВНЫЕ СТИЛИ ===== */
+/* Для экранов до 1199px (планшеты) */
 @media (max-width: 1199px) {
     .slide {
-        flex: 0 0 calc(100% - 20px); /* 1 слайд */
+        flex: 0 0 calc(100% - 20px); /* 1 слайд с отступом */
     }
     
     .slider-wrapper {
-        gap: 20px;
+        gap: 20px; /* Уменьшенное расстояние между слайдами */
     }
 }
 
+/* Для экранов от 1200px (десктоп) */
 @media (min-width: 1200px) {
     .slide {
-        flex: 0 0 calc((100% - 50px) / 2); /* 2 слайда */
+        flex: 0 0 calc((100% - 50px) / 2); /* 2 слайда с отступами */
     }
 }
 
+/* Для экранов до 767px (мобильные) */
 @media (max-width: 767px) {
     .slider-container {
-        padding: 0 10px;
+        padding: 0 10px; /* Уменьшение боковых отступов */
     }
     
     .slide {
-        height: 200px;
-        padding: 10px;
+        height: 200px; /* Уменьшение высоты */
+        padding: 10px; /* Меньший внутренний отступ */
     }
     
     .slide img {
-        padding: 10px;
+        padding: 10px; /* Уменьшение отступа изображения */
     }
 }
 
+/* Для экранов до 479px (маленькие мобильные) */
 @media (max-width: 479px) {
     .slide {
-        height: 150px;
+        height: 150px; /* Минимальная высота */
     }
     
     .navigation-dot {
-        width: 10px;
+        width: 10px; /* Уменьшение размера точек */
         height: 10px;
     }
 }
